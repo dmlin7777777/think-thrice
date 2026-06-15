@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 710" width="720" height="710">
+  <defs>
+    <filter id="shadow" x="-1%" y="-1%" width="102%" height="106%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000" flood-opacity="0.05"/>
+    </filter>
+    <filter id="shadow-card" x="-1%" y="-1%" width="102%" height="104%">
+      <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="#000" flood-opacity="0.07"/>
+    </filter>
+    <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 2 L 8 5 L 0 8 z" fill="#B0BEC5"/>
+    </marker>
+  </defs>
+
+  <!-- BG -->
+  <rect width="720" height="710" fill="#F8F9FA"/>
+
+  <!-- Header -->
+  <text x="360" y="34" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#1A1A2E">build-forward · 五铁律决策流</text>
+  <text x="360" y="52" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#90A4AE">新想法到达时 Agent 自动执行的五步决策协议</text>
+
+  <!-- Start node -->
+  <rect x="280" y="68" width="160" height="34" rx="17" fill="#263238" filter="url(#shadow)"/>
+  <text x="360" y="90" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#fff">新想法到达</text>
+
+  <!-- Arrow Start → L1 -->
+  <line x1="360" y1="102" x2="360" y2="128" stroke="#B0BEC5" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Card macro: x, y, n, accent, title, detail-lines -->
+  <!-- LAW 1 -->
+  <g transform="translate(40, 132)">
+    <rect x="0" y="0" width="640" height="68" rx="8" fill="#fff" stroke="#E8ECF0" stroke-width="1" filter="url(#shadow-card)"/>
+    <rect x="0" y="0" width="4" height="68" rx="2" fill="#607D8B"/>
+    <circle cx="30" cy="34" r="14" fill="#ECEFF1"/>
+    <text x="30" y="39" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#455A64">1</text>
+    <text x="54" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1A1A2E">先分类，不动手</text>
+    <text x="54" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#78909C">
+      <tspan font-weight="600" fill="#546E7A">A 堵漏</tspan><tspan> → 立即处理</tspan>
+      <tspan dx="18" font-weight="600" fill="#546E7A">B 优化</tspan><tspan> → 问用户</tspan>
+      <tspan dx="18" font-weight="600" fill="#546E7A">C 扩展</tspan><tspan> → 进 inbox + 24h 冷却</tspan>
+    </text>
+  </g>
+
+  <line x1="360" y1="200" x2="360" y2="226" stroke="#B0BEC5" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- LAW 2 -->
+  <g transform="translate(40, 230)">
+    <rect x="0" y="0" width="640" height="68" rx="8" fill="#fff" stroke="#E8ECF0" stroke-width="1" filter="url(#shadow-card)"/>
+    <rect x="0" y="0" width="4" height="68" rx="2" fill="#E53935"/>
+    <circle cx="30" cy="34" r="14" fill="#FFEBEE"/>
+    <text x="30" y="39" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#C62828">2</text>
+    <text x="54" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1A1A2E">评估破坏性</text>
+    <text x="54" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#78909C">
+      <tspan font-weight="600" fill="#43A047">双向门</tspan><tspan> → 可逆，直接继续</tspan>
+      <tspan dx="14" fill="#CFD8DC">|</tspan>
+      <tspan dx="14" font-weight="600" fill="#E53935">单向门</tspan><tspan> → DB schema · API · 全局状态</tspan>
+    </text>
+    <!-- CHECKPOINT badge -->
+    <rect x="548" y="-11" width="92" height="20" rx="10" fill="#FFEBEE"/>
+    <circle cx="556" cy="-1" r="4" fill="#E53935"/>
+    <text x="566" y="3" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#C62828">CHECKPOINT</text>
+  </g>
+
+  <line x1="360" y1="298" x2="360" y2="324" stroke="#B0BEC5" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- LAW 3 -->
+  <g transform="translate(40, 328)">
+    <rect x="0" y="0" width="640" height="68" rx="8" fill="#fff" stroke="#E8ECF0" stroke-width="1" filter="url(#shadow-card)"/>
+    <rect x="0" y="0" width="4" height="68" rx="2" fill="#7E57C2"/>
+    <circle cx="30" cy="34" r="14" fill="#EDE7F6"/>
+    <text x="30" y="39" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#4527A0">3</text>
+    <text x="54" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1A1A2E">消费者审计</text>
+    <text x="54" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#78909C">
+      <tspan font-weight="600" fill="#E53935">0</tspan><tspan> → 不建</tspan>
+      <tspan dx="22" font-weight="600" fill="#7E57C2">1</tspan><tspan> → 最简内联</tspan>
+      <tspan dx="22" font-weight="600" fill="#7E57C2">2</tspan><tspan> → 可提取</tspan>
+      <tspan dx="22" font-weight="600" fill="#43A047">≥3</tspan><tspan> → 才考虑抽象</tspan>
+    </text>
+  </g>
+
+  <line x1="360" y1="396" x2="360" y2="422" stroke="#B0BEC5" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- LAW 4 -->
+  <g transform="translate(40, 426)">
+    <rect x="0" y="0" width="640" height="68" rx="8" fill="#fff" stroke="#E8ECF0" stroke-width="1" filter="url(#shadow-card)"/>
+    <rect x="0" y="0" width="4" height="68" rx="2" fill="#00897B"/>
+    <circle cx="30" cy="34" r="14" fill="#E0F2F1"/>
+    <text x="30" y="39" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#00695C">4</text>
+    <text x="54" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1A1A2E">选接入模式 — 从破坏性最低的开始</text>
+    <text x="54" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#78909C">
+      <tspan font-weight="600" fill="#00897B">Wrap</tspan>
+      <tspan dx="12" fill="#B0BEC5">→</tspan>
+      <tspan dx="12" font-weight="600" fill="#00897B">Extend</tspan>
+      <tspan dx="12" fill="#B0BEC5">→</tspan>
+      <tspan dx="12" font-weight="600" fill="#FF8F00">Branch</tspan>
+      <tspan dx="12" fill="#B0BEC5">→</tspan>
+      <tspan dx="12" font-weight="600" fill="#E53935">Replace</tspan>
+      <tspan dx="12" fill="#90A4AE">（最后手段）</tspan>
+    </text>
+  </g>
+
+  <line x1="360" y1="494" x2="360" y2="520" stroke="#B0BEC5" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- LAW 5 -->
+  <g transform="translate(40, 524)">
+    <rect x="0" y="0" width="640" height="68" rx="8" fill="#fff" stroke="#E8ECF0" stroke-width="1" filter="url(#shadow-card)"/>
+    <rect x="0" y="0" width="4" height="68" rx="2" fill="#FF8F00"/>
+    <circle cx="30" cy="34" r="14" fill="#FFF8E1"/>
+    <text x="30" y="39" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#E65100">5</text>
+    <text x="54" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#1A1A2E">重复报警</text>
+    <text x="54" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#78909C">
+      <tspan font-weight="600" fill="#E65100">同一逻辑重复 ≥3 次</tspan><tspan> → 暂停，问用户：现在统一还是记 inbox？</tspan>
+    </text>
+    <!-- CHECKPOINT badge -->
+    <rect x="548" y="-11" width="92" height="20" rx="10" fill="#FFF8E1"/>
+    <circle cx="556" cy="-1" r="4" fill="#FF8F00"/>
+    <text x="566" y="3" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#E65100">CHECKPOINT</text>
+  </g>
+
+  <!-- Arrow L5 → All Clear -->
+  <line x1="360" y1="592" x2="360" y2="620" stroke="#B0BEC5" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- All Clear Gate -->
+  <g transform="translate(180, 624)">
+    <rect x="0" y="0" width="360" height="42" rx="21" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.5" filter="url(#shadow-card)"/>
+    <text x="180" y="27" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#2E7D32">✅ 最终确认门</text>
+  </g>
+
+  <!-- Arrow All Clear → Code -->
+  <line x1="360" y1="666" x2="360" y2="690" stroke="#B0BEC5" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Code label -->
+  <text x="360" y="706" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#546E7A">开始写代码</text>
+</svg>

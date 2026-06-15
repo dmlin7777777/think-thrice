@@ -103,58 +103,7 @@ git clone https://github.com/dmlin7777777/build-forward.git ~/.workbuddy/skills/
 
 ## How It Works
 
-```mermaid
-graph TD
-    START[💡 New idea arrives] --> L1
-
-    subgraph "Iron Law 1 — Classify"
-        L1{What type?}
-        L1 -->|"A — Fix (broken path)"| L2
-        L1 -->|"B — Polish (works, but rough)"| ASK1[Ask: now or inbox?]
-        L1 -->|"C — Extend (new territory)"| INBOX[📥 Inbox + 24h cooldown]
-    end
-
-    ASK1 -->|"Now"| L2
-    ASK1 -->|"Inbox"| INBOX
-    INBOX --> END[🏁 Done — revisit later]
-
-    subgraph "Iron Law 2 — Assess"
-        L2{One-way door?}
-        L2 -->|"Yes — DB schema, API, state"| CHECK1((🔴 CHECKPOINT))
-        L2 -->|"No — UI, new field, new route"| L3
-    end
-
-    CHECK1 -->|"Impact matrix → User confirms"| L3
-
-    subgraph "Iron Law 3 — Audit Consumers"
-        L3{How many consumers?}
-        L3 -->|"0"| SKIP[❌ Don&apos;t build]
-        L3 -->|"1"| INLINE[Inline — no abstraction]
-        L3 -->|"2"| EXTRACT[Extract — don&apos;t generalize]
-        L3 -->|"≥3"| ABSTRACT[Consider abstraction]
-    end
-
-    subgraph "Iron Law 4 — Integrate"
-        INLINE --> L4
-        EXTRACT --> L4
-        ABSTRACT --> L4
-        L4[Pick lowest-destructiveness path]
-        L4 --> WRAP[1. Wrap]
-        WRAP --> EXTEND[2. Extend]
-        EXTEND --> BRANCH[3. Branch]
-        BRANCH --> REPLACE[4. Replace — last resort]
-    end
-
-    subgraph "Iron Law 5 — Deduplicate"
-        REPLACE --> L5{≥3 duplicates?}
-        L5 -->|"Yes"| CHECK2((🔴 CHECKPOINT))
-        L5 -->|"No"| ALLCLEAR
-    end
-
-    CHECK2 -->|"User: consolidate or inbox"| ALLCLEAR
-    ALLCLEAR[✅ All Clear Gate] --> CODE[Start coding]
-    SKIP --> END
-```
+<img src="assets/decision-tree.svg" alt="build-forward decision flow" width="100%">
 
 ---
 

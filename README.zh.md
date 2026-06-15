@@ -103,58 +103,7 @@ git clone https://github.com/dmlin7777777/build-forward.git ~/.workbuddy/skills/
 
 ## 工作原理
 
-```mermaid
-graph TD
-    START[💡 新想法到达] --> L1
-
-    subgraph "铁律一 — 分类"
-        L1{什么类型？}
-        L1 -->|"A — 堵漏（当前路径断裂）"| L2
-        L1 -->|"B — 优化（能用但不顺）"| ASK1[问用户：现在做还是进 inbox？]
-        L1 -->|"C — 扩展（全新场景）"| INBOX[📥 进 inbox + 24h 冷却]
-    end
-
-    ASK1 -->|"现在做"| L2
-    ASK1 -->|"进 inbox"| INBOX
-    INBOX --> END[🏁 结束 — 冷却后重新评估]
-
-    subgraph "铁律二 — 评估破坏性"
-        L2{是单向门？}
-        L2 -->|"是 — DB schema、API、全局状态"| CHECK1((🔴 CHECKPOINT))
-        L2 -->|"否 — UI、新字段、新路由"| L3
-    end
-
-    CHECK1 -->|"输出影响矩阵 → 等用户确认"| L3
-
-    subgraph "铁律三 — 消费者审计"
-        L3{几个调用方？}
-        L3 -->|"0"| SKIP[❌ 不建]
-        L3 -->|"1"| INLINE[最简实现 — 不抽象]
-        L3 -->|"2"| EXTRACT[可提取 — 不泛化]
-        L3 -->|"≥3"| ABSTRACT[可考虑抽象层]
-    end
-
-    subgraph "铁律四 — 选接入模式"
-        INLINE --> L4
-        EXTRACT --> L4
-        ABSTRACT --> L4
-        L4[选破坏性最低的路径]
-        L4 --> WRAP[1. Wrap]
-        WRAP --> EXTEND[2. Extend]
-        EXTEND --> BRANCH[3. Branch]
-        BRANCH --> REPLACE[4. Replace — 最后手段]
-    end
-
-    subgraph "铁律五 — 重复报警"
-        REPLACE --> L5{≥3 次重复？}
-        L5 -->|"是"| CHECK2((🔴 CHECKPOINT))
-        L5 -->|"否"| ALLCLEAR
-    end
-
-    CHECK2 -->|"问用户：现在统一还是进 inbox"| ALLCLEAR
-    ALLCLEAR[✅ 最终确认门] --> CODE[开始写代码]
-    SKIP --> END
-```
+<img src="assets/decision-tree.svg" alt="build-forward 五铁律决策流" width="100%">
 
 ---
 
