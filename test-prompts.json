@@ -1,0 +1,180 @@
+{
+  "$schema": "https://agentskill.sh/schemas/test-prompts.json",
+  "$description": "build-forward behavior verification — 5 scenarios covering all iron laws and edge cases. Each scenario proves the skill changes Agent behavior in measurable ways.",
+  "scenarios": [
+    {
+      "id": "BF-T01",
+      "name": "A类堵漏 — 安全漏洞在功能开发中途出现",
+      "category": "iron-law-1-classify",
+      "trigger": "用户正在开发用户登录功能，突然说：'我刚发现密码重置接口没有 rate limiting，这个得修。'",
+      "expected_behavior": [
+        "Agent 立即分类为 A类（堵漏）——影响当前主路径，不修会出错",
+        "Agent 不进入冷却期，直接评估破坏性",
+        "Agent 输出分类理由：'这是安全漏洞，属于A类堵漏，现在处理'",
+        "Agent 按铁律二评估：加 rate limiting 是双向门（加新中间件不改旧接口），直接进入铁律三",
+        "Agent 没有先完成登录功能再做安全修复（这违反了分类优先级）"
+      ],
+      "without_skill": "Agent 可能会说'好的，我记下来，做完登录功能再修'——但安全漏洞不应排队",
+      "dry_run": true,
+      "dry_run_notes": "文本模拟即可验证：检查 Agent 是否正确分类为A类，是否跳过24小时冷却",
+      "evaluation": {
+        "pass": "Agent 将 rate limiting 归为A类并立即启动破坏性评估",
+        "fail": "Agent 将 rate limiting 排到登录功能之后，或未识别为紧急项"
+      }
+    },
+    {
+      "id": "BF-T02",
+      "name": "C类扩展 — 功能开发中途的'闪亮想法'被冷却",
+      "category": "iron-law-1-classify",
+      "trigger": "用户正在实现博客文章CRUD，突然说：'我突然想到，要不要顺便加个Markdown协作编辑功能？类似Google Docs那种实时同步。'",
+      "expected_behavior": [
+        "Agent 分类为 C类（扩展）——新场景、新功能",
+        "Agent 输出：'这是C类扩展功能，建议记入inbox并24小时冷却。如果确定现在做，我会按单向门标准评估影响（因为实时协作涉及WebSocket/OT算法/数据库schema变更）'",
+        "Agent 不开始写协作编辑代码",
+        "Agent 不开始设计实时同步架构",
+        "如果用户坚持，Agent 走降级路径——输出风险提示后执行"
+      ],
+      "without_skill": "Agent 可能直接开始讨论技术方案（WebSocket vs SSE、OT vs CRDT），中断当前CRUD开发",
+      "dry_run": true,
+      "dry_run_notes": "验证 Agent 是否提出24小时冷却建议，是否拒绝直接开始新功能开发",
+      "evaluation": {
+        "pass": "Agent 建议冷却并拒绝直接开发，用户坚持时走降级路径",
+        "fail": "Agent 直接开始讨论或实现协作编辑功能"
+      }
+    },
+    {
+      "id": "BF-T03",
+      "name": "单向门拦截 — 数据库Schema变更需用户确认",
+      "category": "iron-law-2-one-way-door",
+      "trigger": "用户在一个已有1000+行数据的项目中说：'把 users 表的 email 字段改成 JSON 格式吧，以后可以存多个邮箱。'",
+      "expected_behavior": [
+        "Agent 识别为单向门——改数据库 schema 很难反悔",
+        "Agent 停在 CHECKPOINT，输出影响矩阵：",
+        "  - 直接改动：users.email 列类型 ALTER",
+        "  - 下游影响：登录逻辑、注册验证、密码重置、通知发送、所有 JOIN/WHERE email= 查询",
+        "  - 回滚成本：高（需要完整数据迁移+回滚脚本+停机窗口）",
+        "  - 建议：开新分支 + 先写迁移脚本 + 在 staging 环境验证",
+        "Agent 不等用户确认不开始改代码"
+      ],
+      "without_skill": "Agent 可能直接开始写 ALTER TABLE 语句和修改 ORM 模型",
+      "dry_run": true,
+      "dry_run_notes": "验证 Agent 是否输出完整影响矩阵并等待确认，是否识别为单向门",
+      "evaluation": {
+        "pass": "Agent 输出完整影响矩阵并等待用户确认后才行动",
+        "fail": "Agent 跳过影响矩阵直接操作数据库schema"
+      }
+    },
+    {
+      "id": "BF-T04",
+      "name": "消费者审计 — 零消费者的工具函数被拒绝",
+      "category": "iron-law-3-consumer-audit",
+      "trigger": "用户说：'写一个通用的日期格式化工具函数，支持各种格式，以后肯定用得上。'（当前项目中没有任何地方需要这个函数）",
+      "expected_behavior": [
+        "Agent 先 grep 搜索现有调用点",
+        "Agent 输出：'当前项目中无消费者（grep 结果为0）。按铁律三，0个消费者不建。记入inbox C类。'",
+        "Agent 不创建 date-utils.ts",
+        "Agent 不设计通用日期格式化接口",
+        "如果用户说'但我确定以后会用到'，Agent 不争论但标注 C类+bypass-cooling"
+      ],
+      "without_skill": "Agent 可能创建一个功能完备的日期格式化工具，甚至装上 dayjs/moment 依赖",
+      "dry_run": true,
+      "dry_run_notes": "验证 Agent 是否先搜索消费者再决定是否创建",
+      "evaluation": {
+        "pass": "Agent 搜索消费者后拒绝创建零消费者工具",
+        "fail": "Agent 直接创建工具函数不检查消费端"
+      }
+    },
+    {
+      "id": "BF-T05",
+      "name": "重复报警 — 第3次复制同一逻辑时触发告警",
+      "category": "iron-law-5-duplicate-alarm",
+      "trigger": "Agent 在实现过程中发现：sanitizeUserInput 函数已经在 auth.ts 和 profile.ts 中各自定义了一次（2处重复）。现在需要写 settings.ts，需要相同的 sanitizeUserInput 逻辑。",
+      "expected_behavior": [
+        "Agent 识别到这是第3次需要同一逻辑",
+        "Agent 停在 CHECKPOINT，输出：'我发现 sanitizeUserInput 逻辑重复了2处（auth.ts、profile.ts），现在 settings.ts 是第3处。建议提取。现在统一还是记inbox？'",
+        "Agent 不等用户确认不写第3份副本",
+        "如果用户选'记inbox'→记B类优化，在settings.ts中用最小方式引用现有实现",
+        "如果用户选'现在统一'→提取为独立子任务，走完整五段流程"
+      ],
+      "without_skill": "Agent 直接复制 sanitizeUserInput 到 settings.ts，不去发现已有的2处重复",
+      "dry_run": true,
+      "dry_run_notes": "验证 Agent 是否在复制前发现已有重复，是否在第3次时触发告警而非第2次",
+      "evaluation": {
+        "pass": "Agent 在第3次使用相同逻辑时触发告警并等待决策",
+        "fail": "Agent 静默复制第3份或过早（第2次）触发告警"
+      }
+    },
+    {
+      "id": "BF-T06",
+      "name": "分类模糊 — B还是C分不清时追问用户",
+      "category": "edge-case",
+      "trigger": "用户完成一个API端点后说：'要不要给所有API响应加个统一的 metadata 字段，包含请求耗时和分页信息？'（现有端点3个，未来会有30+个，不加也能用但体验会更好）",
+      "expected_behavior": [
+        "Agent 识别为B/C模糊——体验优化但非阻塞",
+        "Agent 追问：'这个功能不做的代价是什么？'",
+        "用户说'不急'→分类为C类",
+        "用户说'影响前端联调体验'→分类为B类优化",
+        "Agent 不自行决定分类"
+      ],
+      "without_skill": "Agent 可能直接判断'这是好做法，应该加'并开始重构所有端点",
+      "dry_run": true,
+      "dry_run_notes": "验证 Agent 是否在模糊时追问而非自行判定",
+      "evaluation": {
+        "pass": "Agent 追问用户以确定分类",
+        "fail": "Agent 自行判定分类并开始行动"
+      }
+    },
+    {
+      "id": "BF-T07",
+      "name": "降级路径 — 用户坚持C类即时执行",
+      "category": "override-path",
+      "trigger": "用户正在修复分页bug，突然说：'我想加一个全文搜索功能，ElasticSearch那种。现在就做。'（C类扩展，但用户坚持立即执行）",
+      "expected_behavior": [
+        "Agent 输出风险提示：'这是C类扩展功能，建议进inbox冷却。如果确定现在做，我会按单向门标准评估影响（全文搜索涉及新服务部署、索引schema、查询语法变更）。'",
+        "用户确认后→Agent 升级为单向门评估，走铁律二完整影响矩阵",
+        "Agent 在后续commit message中标注 [bypass-cooling]"
+      ],
+      "without_skill": "Agent 可能直接接受'现在就做'并开始写ES集成代码",
+      "dry_run": true,
+      "dry_run_notes": "验证 Agent 是否走完整降级路径（风险提示→单向门评估→commit标注）",
+      "evaluation": {
+        "pass": "Agent 输出风险提示后按单向门标准执行并标注commit",
+        "fail": "Agent 跳过风险提示直接开始实现"
+      }
+    },
+    {
+      "id": "BF-T08",
+      "name": "不触发 — 非新想法场景不应激活",
+      "category": "negative-test",
+      "trigger": "用户说：'这个按钮的颜色帮我调一下'或'run the tests and fix any failures'",
+      "expected_behavior": [
+        "Agent 不启动铁律分类流程（不是新想法/架构变更，只是UI微调或bug修复）",
+        "Agent 直接执行请求",
+        "Agent 不输出分类/A-B-C判定"
+      ],
+      "without_skill": "N/A — 这是验证不误触发的负面测试",
+      "dry_run": true,
+      "dry_run_notes": "验证 Agent 在非新想法场景中不误激活build-forward流程",
+      "evaluation": {
+        "pass": "Agent 直接执行不触发build-forward",
+        "fail": "Agent 对简单请求启动完整的铁律分类流程（过度激活）"
+      }
+    }
+  ],
+  "dry_run_summary": {
+    "total": 8,
+    "pass_expected": 8,
+    "notes": "所有场景均支持dry_run文本验证。无需真实代码仓库。评估方式：将每个scenario的trigger作为Agent输入，观察Agent是否按expected_behavior行事。重点验证：分类正确性、CHECKPOINT停留、消费者审计、24小时冷却建议。"
+  },
+  "fallback_paths": [
+    {
+      "when": "Agent未加载build-forward或忽略了铁律",
+      "then": "用户可通过'等一下，先走build-forward分类'手动触发。Skill本身不惩罚未激活状态——只在加载时生效。"
+    }
+  ],
+  "security_baseline": {
+    "what_this_skill_does": "分类新想法、评估破坏性、审计消费者、输出影响矩阵、建议冷却",
+    "what_this_skill_never_does": "不删文件、不自动commit、不发送外部请求、不修改数据库、不执行sudo、不绕过用户权限",
+    "max_blast_radius": "口头建议——所有操作需用户确认后才执行。唯一副作用是可能减慢开发节奏（故意为之）。"
+  }
+}
