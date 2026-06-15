@@ -7,25 +7,25 @@
 <p align="center">
   <a href="https://github.com/dmlin7777777/build-forward/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
   <a href="SKILL.md"><img src="https://img.shields.io/badge/skill-v1.1.0-brightgreen" alt="Version 1.1.0"></a>
-  <a href="#scoring"><img src="https://img.shields.io/badge/score-81%2F100-orange" alt="Luban score 81/100"></a>
+  <a href="#optimization-history"><img src="https://img.shields.io/badge/score-81%2F100-orange" alt="Luban score 81/100"></a>
   <a href="https://skills.sh/dmlin7777777/build-forward"><img src="https://skills.sh/b/dmlin7777777/build-forward" alt="skills.sh installs"></a>
 </p>
 
 <p align="center">
   <a href="#before--after">Demo</a> ·
   <a href="#quick-start">Quick Start</a> ·
-  <a href="#how-it-works">How It Works</a> ·
+  <a href="#the-five-iron-laws">Five Laws</a> ·
   <a href="SKILL.md">Full Protocol</a> ·
   <a href="test-prompts.json">Test Scenarios</a>
 </p>
 
 ---
 
-## What is this?
+## What problem does it solve?
 
-**AI agents default to rewriting when a new idea appears. `build-forward` stops that.**
+Every AI-assisted developer knows the cycle: you're building feature A, a new idea for feature B pops up, the agent rewrites half the codebase to "make room" for B, and now everything is broken. It's not a tooling problem — it's a **discipline** problem. Agents don't have any.
 
-It's a five-step decision protocol loaded as a skill. When you say *"I just thought of..."* mid-development, instead of bulldozing your working code, the agent pauses, classifies the idea, audits the blast radius, and asks before touching anything. You stay in control. The working code stays working.
+`build-forward` gives them a five-step decision protocol. When you say *"I just thought of..."* mid-development, instead of bulldozing your working code, the agent pauses, classifies the idea, audits the blast radius, and asks before touching anything. You stay in control.
 
 ---
 
@@ -36,22 +36,6 @@ It's a five-step decision protocol loaded as a skill. When you say *"I just thou
 </p>
 
 > The difference is one loaded skill. See [`test-prompts.json`](test-prompts.json) for 8 reproducible scenarios.
-
----
-
-## Why build-forward?
-
-Every AI-assisted developer knows the cycle: you're building feature A, a new idea for feature B pops up, the agent rewrites half the codebase to "make room" for B, and now everything is broken. It's not a tooling problem — it's a **discipline** problem. Agents don't have any.
-
-`build-forward` gives them a protocol:
-
-| Problem | What build-forward does |
-|---------|------------------------|
-| Agent jumps to code instead of thinking | **Classify first** — every idea gets a label (A/B/C) before a single line changes |
-| Agent bulldozes working features to "make room" | **Audit consumers** — count call sites before building anything |
-| Agent treats all changes as equal | **Assess destructiveness** — one-way doors get a checkpoint pause |
-| Agent over-abstracts "for the future" | **Count before extracting** — 0 consumers = don't build; 1 = inline |
-| Agent churns on the same pattern repeatedly | **Duplication alert** — ≥3 copies triggers a stop-and-ask |
 
 ---
 
@@ -91,61 +75,23 @@ Your agent should pause, output a C-class classification + 24h cooldown suggesti
 
 ---
 
-## How It Works
-
-<img src="assets/decision-tree.svg" alt="build-forward decision flow" width="100%">
-
----
-
-## Quick reference
+## The Five Iron Laws
 
 <p align="center">
   <img src="assets/five-laws-card.svg" alt="build-forward five iron laws quick reference" width="100%">
 </p>
 
-## The Five Iron Laws
+**Law 1 — Classify first, don't code.** Every idea gets labeled A (fix — handle now) / B (polish — ask user) / C (extend — inbox + 24h cooldown). The cooldown is deliberate: most feature urges either fade or crystallize.
 
-### Law 1 — Classify First, Don't Code
+**Law 2 — Assess destructiveness.** Two-way doors (UI, new fields, new routes) proceed. One-way doors (DB schema, public API, file deletion, global state) → 🔴 CHECKPOINT — show impact matrix, wait for user.
 
-| Type | Criteria | Default Action |
-|------|----------|----------------|
-| **A — Fix** | Breaks current main path; must fix | Handle now → Law 2 |
-| **B — Polish** | Better UX, but works today | Ask user: now or inbox? |
-| **C — Extend** | New feature / scenario | Inbox + 24h cooldown |
+**Law 3 — Consumer audit.** Count call sites before building. 0 = don't build. 1 = inline, no abstraction. 2 = extract, don't generalize. ≥3 = consider an abstraction layer. Kills "building for the future" at the source.
 
-The 24-hour cooldown is deliberate: most feature urges either fade or crystallize.
+**Law 4 — Choose integration mode.** Lowest destructiveness first: **Wrap** → **Extend** → **Branch** → **Replace** (last resort).
 
-### Law 2 — Assess Destructiveness
+**Law 5 — Duplication alert.** ≥3 copies of the same logic → 🔴 CHECKPOINT. Ask user: consolidate now, or inbox?
 
-| Door type | Examples | Action |
-|-----------|----------|--------|
-| **Two-way** (reversible) | UI tweak, new field, new function, new route | Proceed |
-| **One-way** (hard to reverse) | DB schema, public API, file deletion, global state, core deps | 🔴 **CHECKPOINT** — show impact matrix, wait for user |
-
-### Law 3 — Consumer Audit
-
-Count call sites before building anything.
-
-| Consumers | Action |
-|-----------|--------|
-| **0** | Don't build |
-| **1** | Inline — no abstraction |
-| **2** | Extract — don't generalize |
-| **≥3** | Consider an abstraction layer |
-
-Kills "building for the future" before it starts.
-
-### Law 4 — Choose Integration Mode
-
-Pick lowest-destructiveness path:
-
-**Wrap** → **Extend** → **Branch** → **Replace** (last resort)
-
-### Law 5 — Duplication Alert
-
-≥3 copies of the same logic → 🔴 **CHECKPOINT**. Ask user: consolidate now, or inbox?
-
-> Full protocol with edge cases and self-correction rules in [`SKILL.md`](SKILL.md).
+> Full protocol with edge cases, self-correction rules, and override paths in [`SKILL.md`](SKILL.md).
 
 ---
 
