@@ -9,7 +9,7 @@
     {
       "name": "build-forward",
       "description": "When a new idea arrives mid-development, classify it, assess destructiveness, audit consumers, and choose the lowest-impact integration path — instead of rewriting. Agent's new idea firewall.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "source": "./",
       "author": {
         "name": "David Lin",

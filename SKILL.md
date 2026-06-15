@@ -1,7 +1,7 @@
 ---
 name: build-forward
 description: When a new idea arrives mid-development, classify it, assess destructiveness, audit consumers, and choose the lowest-impact integration path — instead of rewriting. Trigger words (CN): "我突然想到""要不要顺便""能不能改成""加个功能""改成"; (EN): "I just thought of""can we also""what if we change""let's also add""should we refactor"
-version: 1.1.0
+version: 1.2.0
 author: dmlin7777777
 tags: [workflow, idea-management, vibe-coding, agent-discipline, no-rewrite]
 ---

@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/dmlin7777777/build-forward/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
-  <a href="SKILL.md"><img src="https://img.shields.io/badge/skill-v1.1.0-brightgreen" alt="Version 1.1.0"></a>
+  <a href="SKILL.md"><img src="https://img.shields.io/badge/skill-v1.2.0-brightgreen" alt="Version 1.2.0"></a>
   <a href="#optimization-history"><img src="https://img.shields.io/badge/score-81%2F100-orange" alt="Luban score 81/100"></a>
   <a href="https://skills.sh/dmlin7777777/build-forward"><img src="https://skills.sh/b/dmlin7777777/build-forward" alt="skills.sh installs"></a>
 </p>
