@@ -7,8 +7,8 @@
 <p align="center">
   <a href="https://github.com/dmlin7777777/build-forward/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="许可: MIT"></a>
   <a href="SKILL.md"><img src="https://img.shields.io/badge/skill-v1.1.0-brightgreen" alt="版本 1.1.0"></a>
-  <a href="#评分"><img src="https://img.shields.io/badge/评分-84%2F100-orange" alt="质量评分 84/100"></a>
-  <a href="https://skills.sh"><img src="https://img.shields.io/badge/available_on-skills.sh-6366f1" alt="已在 skills.sh 上线"></a>
+  <a href="#过尺评分"><img src="https://img.shields.io/badge/过尺-81%2F100-orange" alt="鲁班过尺 81/100"></a>
+  <a href="https://skills.sh/dmlin7777777/build-forward"><img src="https://skills.sh/b/dmlin7777777/build-forward" alt="skills.sh installs"></a>
 </p>
 
 <p align="center">
@@ -79,9 +79,15 @@ git clone https://github.com/dmlin7777777/build-forward.git ~/.workbuddy/skills/
 | "能不能改成…" | "what if we change…" |
 | "加个功能…" | "let's also add…" |
 
-**3. Agent 会暂停、分类、建议**——而非重写一切。
+**3. 装完第一句话。** 对 Agent 说：
 
-**4. 验证是否生效：** 开发中途说"要不要顺便加个支付系统？" Agent 应输出 C 类分类 + 24 小时冷却建议。
+```text
+我突然想到，要不要顺便加个支付系统？
+```
+
+Agent 应该暂停、输出 C 类分类 + 24 小时冷却建议——而非直接开始写支付代码。
+
+**4. 更多验证场景** 见 [`test-prompts.json`](test-prompts.json) 和 [`examples/`](examples/)。
 
 ---
 
@@ -90,6 +96,12 @@ git clone https://github.com/dmlin7777777/build-forward.git ~/.workbuddy/skills/
 <img src="assets/decision-tree.svg" alt="build-forward 五铁律决策流" width="100%">
 
 ---
+
+## 五铁律速查卡
+
+<p align="center">
+  <img src="assets/five-laws-card.svg" alt="build-forward 五铁律速查卡" width="100%">
+</p>
 
 ## 五条铁律概要
 
@@ -161,9 +173,10 @@ git clone https://github.com/dmlin7777777/build-forward.git ~/.workbuddy/skills/
 
 ## 优化记录
 
-| 日期 | 版本 | 评分变化 | 方法 |
+| 日期 | 版本 | 过尺评分 | 方法 |
 |------|------|---------|------|
-| 2026-06-15 | v1.1.0 | 66 → 82 | 鲁班八步打磨 |
+| 2026-06-15 | v1.2.0 | 81（独立验收） | 鲁班过尺·方案B精雕 |
+| 2026-06-15 | v1.1.0 | 82（预估） | 鲁班八步打磨 |
 | 2026-05-31 | v1.0.0 | 79.6 → 85.0 | Darwin Skill 九维优化 |
 
 ---

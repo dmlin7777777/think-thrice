@@ -7,8 +7,8 @@
 <p align="center">
   <a href="https://github.com/dmlin7777777/build-forward/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
   <a href="SKILL.md"><img src="https://img.shields.io/badge/skill-v1.1.0-brightgreen" alt="Version 1.1.0"></a>
-  <a href="#scorecard"><img src="https://img.shields.io/badge/score-84%2F100-orange" alt="Quality score 84/100"></a>
-  <a href="https://skills.sh"><img src="https://img.shields.io/badge/available_on-skills.sh-6366f1" alt="Available on skills.sh"></a>
+  <a href="#scoring"><img src="https://img.shields.io/badge/score-81%2F100-orange" alt="Luban score 81/100"></a>
+  <a href="https://skills.sh/dmlin7777777/build-forward"><img src="https://skills.sh/b/dmlin7777777/build-forward" alt="skills.sh installs"></a>
 </p>
 
 <p align="center">
@@ -79,9 +79,15 @@ git clone https://github.com/dmlin7777777/build-forward.git ~/.workbuddy/skills/
 | "能不能改成…" | "what if we change…" |
 | "加个功能…" | "let's also add…" |
 
-**3. Your agent now pauses, classifies, and suggests** — instead of rewriting.
+**3. First prompt after install.** Say to your agent:
 
-**4. Verify it works:** mid-feature, say *"what if we also add a payment system?"* Your agent should respond with a C-class classification and a 24h cooldown suggestion.
+```text
+I just thought of... what if we also add a payment system?
+```
+
+Your agent should pause, output a C-class classification + 24h cooldown suggestion — not start writing payment code.
+
+**4. More test scenarios** in [`test-prompts.json`](test-prompts.json) and [`examples/`](examples/).
 
 ---
 
@@ -90,6 +96,12 @@ git clone https://github.com/dmlin7777777/build-forward.git ~/.workbuddy/skills/
 <img src="assets/decision-tree.svg" alt="build-forward decision flow" width="100%">
 
 ---
+
+## Quick reference
+
+<p align="center">
+  <img src="assets/five-laws-card.svg" alt="build-forward five iron laws quick reference" width="100%">
+</p>
 
 ## The Five Iron Laws
 
@@ -163,7 +175,8 @@ The pipeline: **brainstorming → build-forward → ideas-inbox → vibecoding-w
 
 | Date | Version | Score | Method |
 |------|---------|-------|--------|
-| 2026-06-15 | v1.1.0 | 66 → 82 | Luban (鲁班) 8-step polish |
+| 2026-06-15 | v1.2.0 | 81 (independent) | Luban Plan B — craft polish |
+| 2026-06-15 | v1.1.0 | 82 (estimated) | Luban 8-step polish |
 | 2026-05-31 | v1.0.0 | 79.6 → 85.0 | Darwin Skill 9-dim optimization |
 
 ---
