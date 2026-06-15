@@ -7,8 +7,6 @@
 <p align="center">
   <a href="https://github.com/dmlin7777777/think-thrice/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="许可: MIT"></a>
   <a href="SKILL.md"><img src="https://img.shields.io/badge/skill-v1.2.0-brightgreen" alt="版本 1.2.0"></a>
-  <a href="#优化记录"><img src="https://img.shields.io/badge/过尺-81%2F100-orange" alt="鲁班过尺 81/100"></a>
-  <a href="https://github.com/dmlin7777777/think-thrice/stargazers"><img src="https://img.shields.io/github/stars/dmlin7777777/think-thrice?style=flat" alt="GitHub stars"></a>
 </p>
 
 <p align="center">
