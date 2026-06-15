@@ -7,7 +7,7 @@
 
   <rect width="600" height="420" rx="12" fill="#F8F9FA"/>
 
-  <text x="300" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#1A1A2E">build-forward 五铁律速查卡</text>
+  <text x="300" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#1A1A2E">三思 · 五铁律速查卡</text>
   <text x="300" y="50" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A4AE">新想法到达时，Agent 必须走完五步才能写第一行代码</text>
 
   <!-- Law 1 -->

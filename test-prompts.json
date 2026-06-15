@@ -1,6 +1,6 @@
 {
   "$schema": "https://agentskill.sh/schemas/test-prompts.json",
-  "$description": "build-forward behavior verification — 5 scenarios covering all iron laws and edge cases. Each scenario proves the skill changes Agent behavior in measurable ways.",
+  "$description": "三思 (build-forward) behavior verification — 5 scenarios covering all iron laws and edge cases. Each scenario proves the skill changes Agent behavior in measurable ways.",
   "scenarios": [
     {
       "id": "BF-T01",
@@ -154,9 +154,9 @@
       ],
       "without_skill": "N/A — 这是验证不误触发的负面测试",
       "dry_run": true,
-      "dry_run_notes": "验证 Agent 在非新想法场景中不误激活build-forward流程",
+      "dry_run_notes": "验证 Agent 在非新想法场景中不误激活三思流程",
       "evaluation": {
-        "pass": "Agent 直接执行不触发build-forward",
+        "pass": "Agent 直接执行不触发三思流程",
         "fail": "Agent 对简单请求启动完整的铁律分类流程（过度激活）"
       }
     }
@@ -168,8 +168,8 @@
   },
   "fallback_paths": [
     {
-      "when": "Agent未加载build-forward或忽略了铁律",
-      "then": "用户可通过'等一下，先走build-forward分类'手动触发。Skill本身不惩罚未激活状态——只在加载时生效。"
+      "when": "Agent未加载三思或忽略了铁律",
+      "then": "用户可通过'等一下，先走三思分类'手动触发。Skill本身不惩罚未激活状态——只在加载时生效。"
     }
   ],
   "security_baseline": {

@@ -1,14 +1,14 @@
 {
-  "name": "build-forward-marketplace",
-  "description": "Marketplace for the build-forward skill — Agent's new idea firewall",
+  "name": "三思-marketplace",
+  "description": "Marketplace for 三思 (build-forward) — Agent's new idea firewall",
   "owner": {
     "name": "David Lin",
     "email": "dmlin7777777@gmail.com"
   },
   "plugins": [
     {
-      "name": "build-forward",
-      "description": "When a new idea arrives mid-development, classify it, assess destructiveness, audit consumers, and choose the lowest-impact integration path — instead of rewriting. Agent's new idea firewall.",
+      "name": "三思",
+      "description": "三思而后行 — When a new idea arrives mid-development, classify it, assess destructiveness, audit consumers, and choose the lowest-impact integration path — instead of rewriting.",
       "version": "1.2.0",
       "source": "./",
       "author": {

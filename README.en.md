@@ -1,7 +1,7 @@
-# build-forward
+# 三思 (build-forward)
 
 <p align="center">
-  <b>Agent's New Idea Firewall — classify, don't rewrite.</b>
+  <b>Think Thrice Before Acting — Agent's New Idea Firewall.</b>
 </p>
 
 <p align="center">
@@ -25,14 +25,14 @@
 
 Every AI-assisted developer knows the cycle: you're building feature A, a new idea for feature B pops up, the agent rewrites half the codebase to "make room" for B, and now everything is broken. It's not a tooling problem — it's a **discipline** problem. Agents don't have any.
 
-`build-forward` gives them a five-step decision protocol. When you say *"I just thought of..."* mid-development, instead of bulldozing your working code, the agent pauses, classifies the idea, audits the blast radius, and asks before touching anything. You stay in control.
+`三思` (build-forward) gives them a five-step decision protocol. When you say *"I just thought of..."* mid-development, instead of bulldozing your working code, the agent pauses, classifies the idea, audits the blast radius, and asks before touching anything. You stay in control.
 
 ---
 
 ## Before → After
 
 <p align="center">
-  <img src="assets/demo.png" alt="Without vs With build-forward — Before/After comparison" width="100%">
+  <img src="assets/demo.png" alt="Without vs With 三思 — Before/After comparison" width="100%">
 </p>
 
 > The difference is one loaded skill. See [`test-prompts.json`](test-prompts.json) for 8 reproducible scenarios.
@@ -78,7 +78,7 @@ Your agent should pause, output a C-class classification + 24h cooldown suggesti
 ## The Five Iron Laws
 
 <p align="center">
-  <img src="assets/five-laws-card.svg" alt="build-forward five iron laws quick reference" width="100%">
+  <img src="assets/five-laws-card.svg" alt="三思 five iron laws quick reference" width="100%">
 </p>
 
 **Law 1 — Classify first, don't code.** Every idea gets labeled A (fix — handle now) / B (polish — ask user) / C (extend — inbox + 24h cooldown). The cooldown is deliberate: most feature urges either fade or crystallize.
@@ -103,17 +103,17 @@ Your agent should pause, output a C-class classification + 24h cooldown suggesti
 
 ## Ecosystem
 
-`build-forward` fills the gap between "what should we build?" and "how do we build it safely?"
+`三思` fills the gap between "what should we build?" and "how do we build it safely?"
 
 | Skill | Role | When |
 |-------|------|------|
 | `brainstorming` / `grill-me` | Requirements clarification | Before coding starts |
-| **`build-forward`** | **New idea firewall** | **Mid-development, new idea arrives** |
+| **`三思`** | **New idea firewall** | **Mid-development, new idea arrives** |
 | `ideas-inbox` | B/C-class archive + cooldown tracking | After classification |
 | `vibecoding-workflow` | Execution discipline | After integration path is chosen |
 | `incremental-implementation` | Steady, step-by-step execution | Known requirements, how to execute safely |
 
-The pipeline: **brainstorming → build-forward → ideas-inbox → vibecoding-workflow / incremental-implementation**
+The pipeline: **brainstorming → 三思 → ideas-inbox → vibecoding-workflow / incremental-implementation**
 
 ---
 

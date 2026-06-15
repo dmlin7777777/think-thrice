@@ -1,6 +1,6 @@
 # 影响矩阵填写示例
 
-> 以下是 build-forward 铁律二触发后，Agent 输出的真实影响矩阵。
+> 以下是三思铁律二触发后，Agent 输出的真实影响矩阵。
 > 场景来自 test-prompts.json BF-T03。
 
 ## 场景
