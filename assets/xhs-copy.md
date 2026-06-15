@@ -32,7 +32,7 @@
 
 **本质是五条铁律，一条都不能跳。**
 
-🔥 开源 / MIT 协议 / 84/100 鲁班工坊认证打磨评分
+🔥 开源 / MIT 协议 / 81/100 鲁班工坊过尺评分
 🔗 GitHub: dmlin7777777/build-forward
 📦 一行安装：`npx skills add dmlin7777777/build-forward`
 
@@ -77,7 +77,7 @@ Wrap → Extend → Branch → Replace（最后手段）
 
 **加载前 vs 加载后**，Agent 行为判若两人。
 
-📊 评分：84/100（鲁班工坊二次打磨）
+📊 评分：81/100（鲁班工坊独立验收）
 📄 协议：MIT 开源
 ⬇️ 安装：`npx skills add dmlin7777777/build-forward`
 

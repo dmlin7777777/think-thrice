@@ -26,7 +26,7 @@
         "决策协议",
         "新想法管理"
       ],
-      "runtime": ["claude-code", "workbuddy", "openclaw"],
+      "runtime": ["claude-code", "workbuddy", "openclaw", "cursor"],
       "license": "MIT"
     }
   ]
