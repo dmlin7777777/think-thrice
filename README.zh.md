@@ -7,7 +7,8 @@
 <p align="center">
   <a href="https://github.com/dmlin7777777/build-forward/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="许可: MIT"></a>
   <a href="SKILL.md"><img src="https://img.shields.io/badge/skill-v1.1.0-brightgreen" alt="版本 1.1.0"></a>
-  <a href="#优化记录"><img src="https://img.shields.io/badge/评分-82%2F100-orange" alt="质量评分 82/100"></a>
+  <a href="#评分"><img src="https://img.shields.io/badge/评分-84%2F100-orange" alt="质量评分 84/100"></a>
+  <a href="https://skills.sh"><img src="https://img.shields.io/badge/available_on-skills.sh-6366f1" alt="已在 skills.sh 上线"></a>
 </p>
 
 <p align="center">
@@ -30,29 +31,9 @@
 
 ## 加载前后对比
 
-**没有 `build-forward`**（大多数 Agent 的默认行为）：
-
-```
-用户："我突然想到……能不能加个实时协作功能？"
-Agent："好主意！让我把 CRUD 接口重写成 WebSocket……"
-       [开始重构认证层、改数据库 schema、破坏现有 API]
-
-用户："等等，我只是想先把基础博客做完……"
-Agent：[已经把 3 个文件改得面目全非]
-```
-
-**有 `build-forward`**（加载后的 Agent 行为）：
-
-```
-用户："我突然想到……能不能加个实时协作功能？"
-Agent："[build-forward] 分类：C 类（扩展功能，新场景）
-       建议进 inbox 并 24 小时冷却。实时协作涉及 WebSocket、
-       OT 算法、DB schema 变更——这是单向门改动。
-       继续当前博客 CRUD 开发？"
-
-用户："对，先把博客做完。"
-Agent：[不受干扰，继续博客 CRUD]
-```
+<p align="center">
+  <img src="assets/demo.png" alt="加载 build-forward 前后的 Agent 行为对比" width="100%">
+</p>
 
 > 就是一个 Skill 的区别。详见 [`test-prompts.json`](test-prompts.json) 中的 8 个可复现验证场景。
 
@@ -81,6 +62,9 @@ Agent：[不受干扰，继续博客 CRUD]
 ```bash
 # OpenClaw / WorkBuddy
 openclaw skills install build-forward
+
+# npx（Claude Code / Codex / 任意 runtime）
+npx skills add dmlin7777777/build-forward
 
 # 或直接 clone
 git clone https://github.com/dmlin7777777/build-forward.git ~/.workbuddy/skills/build-forward

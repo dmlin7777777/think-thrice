@@ -7,7 +7,8 @@
 <p align="center">
   <a href="https://github.com/dmlin7777777/build-forward/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
   <a href="SKILL.md"><img src="https://img.shields.io/badge/skill-v1.1.0-brightgreen" alt="Version 1.1.0"></a>
-  <a href="#optimization-history"><img src="https://img.shields.io/badge/score-82%2F100-orange" alt="Quality score 82/100"></a>
+  <a href="#scorecard"><img src="https://img.shields.io/badge/score-84%2F100-orange" alt="Quality score 84/100"></a>
+  <a href="https://skills.sh"><img src="https://img.shields.io/badge/available_on-skills.sh-6366f1" alt="Available on skills.sh"></a>
 </p>
 
 <p align="center">
@@ -30,29 +31,9 @@ It's a five-step decision protocol loaded as a skill. When you say *"I just thou
 
 ## Before → After
 
-**Without `build-forward`** (what most agents do):
-
-```
-User: "I just thought of... can we also add real-time collaboration?"
-Agent: "Great idea! Let me rewrite the CRUD endpoints to use WebSockets..."
-       [Starts refactoring auth layer, changes DB schema, breaks existing API]
-
-User: "Wait, I just wanted to finish the basic blog first..."
-Agent: [Already 3 files deep into WebSocket integration]
-```
-
-**With `build-forward`** (what your agent does now):
-
-```
-User: "I just thought of... can we also add real-time collaboration?"
-Agent: "[build-forward] 分类: C 类（扩展功能，新场景）
-       建议进 inbox 并 24 小时冷却。实时协作涉及 WebSocket、
-       OT 算法、DB schema 变更——这是单向门改动。
-       继续当前博客 CRUD 开发？"
-
-User: "Yeah, let's finish the blog first."
-Agent: [Continues blog CRUD without interruption]
-```
+<p align="center">
+  <img src="assets/demo.png" alt="Without vs With build-forward — Before/After comparison" width="100%">
+</p>
 
 > The difference is one loaded skill. See [`test-prompts.json`](test-prompts.json) for 8 reproducible scenarios.
 
@@ -81,6 +62,9 @@ Every AI-assisted developer knows the cycle: you're building feature A, a new id
 ```bash
 # OpenClaw / WorkBuddy
 openclaw skills install build-forward
+
+# npx (Claude Code / Codex / any runtime)
+npx skills add dmlin7777777/build-forward
 
 # Or clone directly
 git clone https://github.com/dmlin7777777/build-forward.git ~/.workbuddy/skills/build-forward

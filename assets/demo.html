@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>build-forward — Before / After</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 40px;
+  }
+  .demo { display: flex; gap: 24px; max-width: 960px; width: 100%; }
+  .panel { flex: 1; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .panel-header {
+    padding: 12px 16px; font-size: 13px; font-weight: 600;
+    letter-spacing: .02em; text-transform: uppercase;
+  }
+  .panel.without .panel-header { color: #c0392b; border-bottom: 1px solid #fce4e4; }
+  .panel.with    .panel-header { color: #27ae60; border-bottom: 1px solid #d5f5e3; }
+  .panel-body { padding: 16px; }
+  .chat { display: flex; flex-direction: column; gap: 12px; }
+  .msg { font-size: 14px; line-height: 1.55; }
+  .msg.user { background: #eef1f5; padding: 10px 14px; border-radius: 10px 10px 2px 10px; align-self: flex-end; max-width: 85%; }
+  .msg.agent { background: #f0f0f0; padding: 10px 14px; border-radius: 10px 10px 10px 2px; align-self: flex-start; max-width: 85%; }
+  .msg.agent.danger { background: #fdecea; border-left: 3px solid #c0392b; }
+  .msg.agent.safe  { background: #eafaf1; border-left: 3px solid #27ae60; }
+  .msg.agent.think { background: #fef9e7; border-left: 3px solid #f39c12; font-style: italic; font-size: 13px; }
+  .code-block {
+    margin-top: 8px; padding: 10px 12px; background: #1a1a1a; color: #a5d6a7;
+    font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px;
+    border-radius: 6px; overflow-x: auto; white-space: pre;
+  }
+  .code-block .red { color: #ef9a9a; }
+  .code-block .yellow { color: #fff59d; }
+  .label {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 600; letter-spacing: .03em;
+    margin-right: 6px;
+  }
+  .label.warn  { background: #fdecea; color: #c0392b; }
+  .label.info  { background: #d5f5e3; color: #27ae60; }
+  .label.think { background: #fef9e7; color: #b7950b; }
+  .divider { height: 1px; background: #e0ded9; margin: 20px 0; }
+  .result { padding: 12px 16px; background: #f9fafb; border-radius: 8px; margin-top: 16px; }
+  .result.good { background: #eafaf1; }
+  .result .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 3px;
+    font-size: 11px; font-weight: 700; letter-spacing: .05em;
+    margin-bottom: 8px;
+  }
+  .result .tag.good { background: #27ae60; color: #fff; }
+  .result .tag.bad  { background: #c0392b; color: #fff; }
+</style>
+</head>
+<body>
+<div class="demo">
+
+  <!-- WITHOUT build-forward -->
+  <div class="panel without">
+    <div class="panel-header">Without build-forward</div>
+    <div class="panel-body">
+      <div class="chat">
+        <div class="msg user">I just thought of… can we also make this multi-tenant? Like, each user should have their own workspace.</div>
+        <div class="msg agent danger">
+          <span class="label warn">🔴 REWRITING</span><br>
+          Sure! Let me refactor the database schema and auth system to support multi-tenancy. I'll start by adding a tenant_id column to all tables, then update the middleware, then…
+        </div>
+        <div class="code-block">
+<span class="red">-  users TABLE (drops existing)</span>
+<span class="red">-  deletes current auth middleware</span>
+<span class="red">-  rewrites all API routes</span>
+<span class="yellow">~  15 files changed, no backup</span>
+        </div>
+        <div class="result">
+          <div class="tag bad">RESULT</div>
+          <div class="msg" style="font-size:13px">
+            3 hours later: half the app is broken. The original feature (what you were actually building) is gone. You're now debugging a half-finished multi-tenant migration instead of shipping.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WITH build-forward -->
+  <div class="panel with">
+    <div class="panel-header">With build-forward</div>
+    <div class="panel-body">
+      <div class="chat">
+        <div class="msg user">I just thought of… can we also make this multi-tenant? Like, each user should have their own workspace.</div>
+        <div class="msg agent think">
+          <span class="label think">⚡ CLASSIFYING</span><br>
+          Pausing. Let me classify this idea first.
+        </div>
+        <div class="msg agent safe">
+          <span class="label info">✅ IRON LAW 1 — Classification</span><br>
+          <strong>Type C — Extend</strong> (new territory, not a broken path). The current single-tenant system works. Multi-tenancy is an expansion, not a fix.
+        </div>
+        <div class="msg agent safe">
+          <span class="label info">✅ IRON LAW 2 — Destructiveness</span><br>
+          <strong>⚠ One-way door</strong> (DB schema + auth middleware). Changing the tenant model is hard to undo. Full impact matrix below.
+        </div>
+        <div class="msg agent safe">
+          <span class="label info">✅ IRON LAW 3 — Consumer Audit</span><br>
+          <strong>7 consumers</strong> of the users table found via grep. Any schema change affects auth, billing, teams, invites, and 3 API routes.
+        </div>
+        <div class="msg agent think">
+          <span class="label think">🔴 CHECKPOINT</span><br>
+          Suggestion: file this as a C-type idea in your inbox with a 24h cooldown. When ready, the lowest-destructiveness path is <strong>Branch</strong>: create a parallel multi-tenant module that doesn't touch the existing single-tenant path. Want me to proceed, inbox it, or override?
+        </div>
+        <div class="result good">
+          <div class="tag good">RESULT</div>
+          <div class="msg" style="font-size:13px">
+            Current feature ships today. Multi-tenancy goes into the inbox for next sprint — with a clear integration plan and full consumer audit already done. No code was harmed.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
